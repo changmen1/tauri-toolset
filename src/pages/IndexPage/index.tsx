@@ -95,22 +95,18 @@ const demoTheme = extendTheme({
   },
 });
 
-function useDemoRouter(initialPath: string): Router {
-  const [pathname, setPathname] = React.useState(initialPath);
+function useDemoRouter(): Router {
+  const location = window.location.pathname; // 获取当前真实路径
   const navigate = useNavigate(); // 获取 navigate 函数
   const router = React.useMemo(() => {
-    // navigate("/xiaoshuo"); // 使用 navigate 函数进行导航
     return {
-      pathname,
+      pathname: location, // 直接使用当前 URL
       searchParams: new URLSearchParams(),
-      // navigate: (path: string | URL) => setPathname(String(path)),
       navigate: (path: string | URL) => {
-        setPathname(String(path));
         navigate(path);
-        console.log("路由", path);
       },
     };
-  }, [pathname, navigate]);
+  }, [location, navigate]);
 
   return router;
 }
@@ -118,7 +114,7 @@ function useDemoRouter(initialPath: string): Router {
 export const IndexPage = (props: any) => {
   const { window } = props;
 
-  const router = useDemoRouter("/translate");
+  const router = useDemoRouter();
 
   const demoWindow = window ? window() : undefined;
 

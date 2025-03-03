@@ -9,15 +9,19 @@ const routes = [
     element: <IndexPage />,
     children: [
       {
-        path: "/translate",
+        index: true, // 👈 默认子路由
+        element: <Translate />, // 👈 访问 `/` 默认显示翻译页面
+      },
+      {
+        path: "translate",
         element: <Translate />,
       },
       {
-        path: "/xiaoshuo",
+        path: "xiaoshuo",
         element: <Xiaoshuo />,
       },
       {
-        path: "/setting",
+        path: "setting",
         element: <Setting />,
       },
     ],
