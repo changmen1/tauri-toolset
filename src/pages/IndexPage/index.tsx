@@ -1,0 +1,153 @@
+import * as React from "react";
+import { extendTheme } from "@mui/material/styles";
+import GTranslateIcon from "@mui/icons-material/GTranslate";
+import ImportContactsIcon from "@mui/icons-material/ImportContacts";
+import DescriptionIcon from "@mui/icons-material/Description";
+import SettingsIcon from "@mui/icons-material/Settings";
+import InfoIcon from "@mui/icons-material/Info";
+import MovieFilterIcon from "@mui/icons-material/MovieFilter";
+import { AppProvider, Navigation, Router } from "@toolpad/core/AppProvider";
+import { DashboardLayout } from "@toolpad/core/DashboardLayout";
+import { PageContainer } from "@toolpad/core/PageContainer";
+import Grid from "@mui/material/Grid2";
+import { Outlet, useNavigate } from "react-router-dom";
+
+const NAVIGATION: Navigation = [
+  {
+    kind: "header",
+    title: "home",
+  },
+  {
+    segment: "translate",
+    title: "翻译",
+    icon: <GTranslateIcon />,
+  },
+  {
+    segment: "xiaoshuo",
+    title: "小说",
+    icon: <ImportContactsIcon />,
+  },
+  {
+    kind: "divider",
+  },
+  {
+    kind: "header",
+    title: "Analytics",
+  },
+  {
+    segment: "reports",
+    title: "电影",
+    icon: <MovieFilterIcon />,
+    children: [
+      {
+        segment: "sales",
+        title: "Sales",
+        icon: <DescriptionIcon />,
+      },
+      {
+        segment: "traffic",
+        title: "Traffic",
+        icon: <DescriptionIcon />,
+      },
+    ],
+  },
+  {
+    segment: "setting",
+    title: "设置",
+    icon: <SettingsIcon />,
+  },
+  {
+    segment: "guanyu",
+    title: "关于",
+    icon: <InfoIcon />,
+  },
+];
+
+const demoTheme = extendTheme({
+  //   colorSchemes: { light: true, dark: true },
+  colorSchemes: {
+    light: {
+      palette: {
+        background: {
+          default: "#F9F9FE",
+          paper: "#EEEEF9",
+        },
+      },
+    },
+    dark: {
+      palette: {
+        background: {
+          default: "#2A4364",
+          paper: "#112E4D",
+        },
+      },
+    },
+  },
+  colorSchemeSelector: "class",
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 600,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+});
+
+function useDemoRouter(initialPath: string): Router {
+  const [pathname, setPathname] = React.useState(initialPath);
+  const navigate = useNavigate(); // 获取 navigate 函数
+  const router = React.useMemo(() => {
+    // navigate("/xiaoshuo"); // 使用 navigate 函数进行导航
+    return {
+      pathname,
+      searchParams: new URLSearchParams(),
+      // navigate: (path: string | URL) => setPathname(String(path)),
+      navigate: (path: string | URL) => {
+        setPathname(String(path));
+        navigate(path);
+        console.log("路由", path);
+      },
+    };
+  }, [pathname, navigate]);
+
+  return router;
+}
+
+export const IndexPage = (props: any) => {
+  const { window } = props;
+
+  const router = useDemoRouter("/translate");
+
+  const demoWindow = window ? window() : undefined;
+
+  return (
+    <AppProvider
+      navigation={NAVIGATION}
+      router={router}
+      theme={demoTheme}
+      window={demoWindow}
+    >
+      <DashboardLayout
+        branding={{
+          logo: (
+            <img
+              src="/src/assets/logo.jpg"
+              alt="Logo"
+              style={{ borderRadius: "50%" }}
+            />
+          ),
+          title: "zxlToolset",
+        }}
+      >
+        <PageContainer>
+          <Grid container spacing={1}>
+            {/* 子页面 */}
+            <Outlet />
+          </Grid>
+        </PageContainer>
+      </DashboardLayout>
+    </AppProvider>
+  );
+};

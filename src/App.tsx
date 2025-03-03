@@ -1,9 +1,13 @@
 import "./App.css";
+import { useRoutes } from "react-router-dom";
+import routes from "./router";
 
 function App() {
-
   return (
-    <div>AI+翻译+小说</div>
+    <>
+      {/* 声明式路由管理 */}
+      {useRoutes(routes)}
+    </>
   );
 }
 
