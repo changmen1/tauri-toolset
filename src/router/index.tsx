@@ -1,7 +1,7 @@
 import { IndexPage } from "../pages/IndexPage";
 import Translate from "../pages/translate";
-import Xiaoshuo from "../pages/xiaoshuo";
 import Setting from "../pages/setting";
+import Deepseek from "../pages/deepseek";
 
 const routes = [
   {
@@ -17,8 +17,8 @@ const routes = [
         element: <Translate />,
       },
       {
-        path: "xiaoshuo",
-        element: <Xiaoshuo />,
+        path: "deepseek",
+        element: <Deepseek />,
       },
       {
         path: "setting",

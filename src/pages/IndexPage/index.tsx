@@ -1,11 +1,12 @@
 import * as React from "react";
 import { extendTheme } from "@mui/material/styles";
 import GTranslateIcon from "@mui/icons-material/GTranslate";
-import ImportContactsIcon from "@mui/icons-material/ImportContacts";
-import DescriptionIcon from "@mui/icons-material/Description";
+import SmartToyIcon from '@mui/icons-material/SmartToy';
 import SettingsIcon from "@mui/icons-material/Settings";
 import InfoIcon from "@mui/icons-material/Info";
-import MovieFilterIcon from "@mui/icons-material/MovieFilter";
+// import ImportContactsIcon from "@mui/icons-material/ImportContacts";
+// import DescriptionIcon from "@mui/icons-material/Description";
+// import MovieFilterIcon from "@mui/icons-material/MovieFilter";
 import { AppProvider, Navigation, Router } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { PageContainer } from "@toolpad/core/PageContainer";
@@ -23,9 +24,9 @@ const NAVIGATION: Navigation = [
     icon: <GTranslateIcon />,
   },
   {
-    segment: "xiaoshuo",
-    title: "小说",
-    icon: <ImportContactsIcon />,
+    segment: "deepseek",
+    title: "DeepSeek",
+    icon: <SmartToyIcon />,
   },
   {
     kind: "divider",
@@ -34,23 +35,23 @@ const NAVIGATION: Navigation = [
     kind: "header",
     title: "Analytics",
   },
-  {
-    segment: "reports",
-    title: "电影",
-    icon: <MovieFilterIcon />,
-    children: [
-      {
-        segment: "sales",
-        title: "Sales",
-        icon: <DescriptionIcon />,
-      },
-      {
-        segment: "traffic",
-        title: "Traffic",
-        icon: <DescriptionIcon />,
-      },
-    ],
-  },
+//   {
+//     segment: "reports",
+//     title: "电影",
+//     icon: <MovieFilterIcon />,
+//     children: [
+//       {
+//         segment: "sales",
+//         title: "Sales",
+//         icon: <DescriptionIcon />,
+//       },
+//       {
+//         segment: "traffic",
+//         title: "Traffic",
+//         icon: <DescriptionIcon />,
+//       },
+//     ],
+//   },
   {
     segment: "setting",
     title: "设置",
@@ -77,8 +78,8 @@ const demoTheme = extendTheme({
     dark: {
       palette: {
         background: {
-          default: "#2A4364",
-          paper: "#112E4D",
+          default: "#020817",
+          paper: "#020817",
         },
       },
     },
